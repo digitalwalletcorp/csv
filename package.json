@@ -1,0 +1,72 @@
+{
+  "name": "@digitalwalletcorp/csv",
+  "version": "0.0.1",
+  "description": "CSV / TSV creation, parsing and export.",
+  "type": "module",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      },
+      "require": {
+        "types": "./lib/index.d.cts",
+        "default": "./lib/index.cjs"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./lib/*.d.ts",
+        "default": "./lib/*.js"
+      },
+      "require": {
+        "types": "./lib/*.d.cts",
+        "default": "./lib/*.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "install:dev": "rm -rf lib dest && find node_modules -mindepth 1 -delete && yarn install",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "prepack": "rm -rf lib && npm run build",
+    "pack": "rm -rf dest && mkdir -p dest && npm pack --pack-destination=dest",
+    "publish:npm": "bash ../bin/publish.sh",
+    "test:unit": "vitest run --coverage"
+  },
+  "keywords": [
+    "csv",
+    "tsv",
+    "parser",
+    "stringify",
+    "strict"
+  ],
+  "author": "satoshi kotaki",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalwalletcorp/csv.git"
+  },
+  "homepage": "https://github.com/digitalwalletcorp/csv",
+  "bugs": {
+    "url": "https://github.com/digitalwalletcorp/csv/issues"
+  },
+  "files": [
+    "lib/**/*",
+    "src/**/*"
+  ],
+  "devDependencies": {
+    "@types/node": "24.13.6",
+    "@vitest/coverage-v8": "3.2.4",
+    "typescript": "6.0.3",
+    "vite": "7.3.6",
+    "vite-plugin-dts": "5.1.0",
+    "vitest": "3.2.4"
+  }
+}
